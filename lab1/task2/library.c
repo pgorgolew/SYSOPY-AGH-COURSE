@@ -5,7 +5,7 @@ const int BUFFER_SIZE = 512;
 const char* TMP_FILE = "file.tmp";
 
 uint32_t ARR_LEN;
-char** ARR = NULL; 
+char** ARR; 
 
 void create_table(uint32_t array_len){
     if (ARR != NULL) {
@@ -55,14 +55,13 @@ int load_to_memory(){
 
 int wc_files(int file_count, char** file_names){
     uint32_t file_indexes[file_count];
-    
+
     if (ARR == NULL){
         printf("ERROR: create_table first!\n");
         return -1;
     }
-
     for (int i=0; i<file_count; i++){
-        char buffer[BUFFER_SIZE];
+        char* buffer = calloc(BUFFER_SIZE, sizeof(char));
         int snprintf_result = snprintf(buffer, BUFFER_SIZE, "wc -l -w -c %s > %s", file_names[i], TMP_FILE);
         if (snprintf_result >= BUFFER_SIZE){
             printf("ERROR: Command is too long (max length is %d)\n", BUFFER_SIZE);
@@ -77,7 +76,6 @@ int wc_files(int file_count, char** file_names){
         else {
             system(buffer);
         }
-
         free(buffer);
         int load_status = load_to_memory();
 
@@ -91,8 +89,8 @@ int wc_files(int file_count, char** file_names){
     for (int i=0; i<file_count; i++){
         printf("FILE NAME: %s -> INDEX: %d\n", file_names[i], file_indexes[i]);
     }
-
-    return 0;
+    
+    return 1;
 }
 
 
