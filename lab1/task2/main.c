@@ -5,6 +5,13 @@
 #include <time.h>
 #include <unistd.h>
 #include <stdio.h>
+
+struct func_time{
+    char* func;
+    char* time;
+};
+
+
 int isInArr(char* value, char** arr, int arr_len){
     for (int i=0; i<arr_len; i++){
         if (strcmp(value, arr[i]) == 0)
@@ -45,27 +52,34 @@ double time_in_s(clock_t clock_start, clock_t clock_end){
     return (double)(clock_end - clock_start) / sysconf(_SC_CLK_TCK);
 }
 
-void print_times(clock_t clock_start, clock_t clock_end, struct tms start_tms, struct tms end_tms){
-    printf(
-        "real: %f, user: %f, sys: %f\n", time_in_s(clock_start, clock_end), 
-        time_in_s(start_tms.tms_utime, end_tms.tms_utime), time_in_s(start_tms.tms_stime, end_tms.tms_stime)
-    );
+struct func_time get_time_result(clock_t clock_start, clock_t clock_end, struct tms start_tms, struct tms end_tms, char* func_name){
+    char* buffer = calloc(512, sizeof(char));
+    double real = time_in_s(clock_start, clock_end);
+    double user = time_in_s(start_tms.tms_utime, end_tms.tms_utime);
+    double sys = time_in_s(start_tms.tms_stime, end_tms.tms_stime);
+    snprintf(buffer, 512, "real: %f, user: %f, sys: %f", real, user, sys);
+    struct func_time curr_time_result = {func_name, buffer};
+    return curr_time_result;
+}
+
+void print_times(struct func_time* results, int results_len){
+    for (int i=0; i<results_len; i++){
+        printf("%s %s \n", results[i].func, results[i].time);
+    }
 }
 
 int main(int arg_len, char **args){
-    struct tms start_tms;
-    struct tms end_tms;
-    clock_t clock_start;
-    clock_t clock_end;
-
-    int i = 1; //first arg is ./main
-
-    if (arg_len < 1){
+    struct tms start_tms, end_tms, start_main, end_main;
+    clock_t clock_start, clock_end, c_start_main, c_end_main;
+    c_start_main = times(&start_main);
+    
+    int i = 1; //first arg is './main'
+    if (arg_len < 2){
         printf("ERROR: No arguments given! ");
         return -1;
     }
 
-    if (strcmp(args[i], "create_table") != 0){
+    if (strcmp(args[1], "create_table") != 0){
         printf("ERROR: You have to create_table first! ");
         return -1;
     }
@@ -77,43 +91,61 @@ int main(int arg_len, char **args){
 
     char* curr_func;
     char* curr_arg;
-    while(i<arg_len){
-        clock_start = times(&start_tms);
-        curr_func = args[i];
 
+    int funcs_count = 1; //cause one is main func
+    for (int j=1; j<arg_len; j++){
+        if (isInArr(args[j], funcs, 3) == 1)
+            funcs_count++;
+    }
+
+    struct func_time* time_results = calloc(funcs_count, sizeof(struct func_time));
+    int t = 0;
+    while(i<arg_len){
+        curr_func = args[i];
         i++;
         if (i == arg_len)
             break;
         
         curr_arg = args[i];
-        while(isInArr(curr_arg, funcs, 3) == 0){
-            int add_to_i = 1;
-            if (strcmp(curr_func, "create_table") == 0)
-                create_table(parse_str_to_uint(curr_arg));
+        int add_to_i = 1;
 
-            else if (strcmp(curr_func, "wc_files") == 0){
-                int files_count = count_files_for_wc(funcs, i, arg_len, args);
-                char** files_for_wc = create_arr_for_wc(i, args, files_count);
-                add_to_i = files_count;
-                printf("%d %s\n", files_count, files_for_wc[0] );
-                wc_files(files_count, files_for_wc);
-            }
-
-            else if (strcmp(curr_func, "remove_block"))
-                remove_block(parse_str_to_uint(curr_arg));
-            
-            i += add_to_i;
-            if (i>=arg_len)
-                break;
-
-            curr_arg  = args[i];
+        
+        if (strcmp(curr_func, "create_table") == 0){
+            clock_start = times(&start_tms);
+            create_table(parse_str_to_uint(curr_arg));
         }
-        clock_end = times(&end_tms);
-        print_times(clock_start, clock_end, start_tms, end_tms);
-    }
-    clock_end = times(&end_tms);
-    print_times(clock_start, clock_end, start_tms, end_tms);
-    
-    return 1;
-}
 
+        else if (strcmp(curr_func, "wc_files") == 0){
+            int files_count = count_files_for_wc(funcs, i, arg_len, args);
+            char** files_for_wc = create_arr_for_wc(i, args, files_count);
+            add_to_i = files_count;
+            clock_start = times(&start_tms);
+            wc_files(files_count, files_for_wc);
+        }
+
+        else if (strcmp(curr_func, "remove_block")){
+            clock_start = times(&start_tms);
+            remove_block(parse_str_to_uint(curr_arg));
+        }
+        
+        else {
+            printf("ERROR: not defined function");
+            return -1;
+        }
+
+        clock_end = times(&end_tms);
+
+        i += add_to_i;
+        curr_arg  = args[i];
+        
+        struct func_time curr_time_result = get_time_result(clock_start, clock_end, start_tms, end_tms, curr_func);
+        time_results[t] = curr_time_result;
+        t++;
+    }
+    c_end_main = times(&end_main);
+    struct func_time curr_time_result = get_time_result(c_start_main, c_end_main, start_main, end_main, "main");
+    time_results[t] = curr_time_result;
+
+    print_times(time_results, funcs_count);
+    return 0;
+}
