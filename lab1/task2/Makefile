@@ -20,12 +20,13 @@ out: main.o library.o
 	$(CC) main.o lib$(LIB_NAME).a -o out
 
 clean:
-	rm -f *.o *.so *.a large*.txt medium*.txt small*.txt file.tmp out
+	rm -f *.o *.so *.a large*.txt medium*.txt small*.txt empty.txt file.tmp out
 
 just_static: clean static main out
 
 create_files:
 	bash generate.sh
+	
 
 valgrind_elo:
 	make just_static
@@ -80,5 +81,8 @@ get_raport_2: clean just_static create_files
 
 	echo "Load and remove large file" >> raport2.txt
 	./out create_table 1 load_to_memory large1.txt remove_block 0 | tail -4 >> raport2.txt
+	echo "\n" >> raport2.txt
 
+	echo "3x(3xload then 3xremove)" >> raport2.txt
+	./out create_table 9 load_to_memory empty.txt load_to_memory empty.txt load_to_memory empty.txt remove_block 0 remove_block 1 remove_block 2 load_to_memory empty.txt load_to_memory empty.txt load_to_memory empty.txt remove_block 3 remove_block 4 remove_block 5 load_to_memory empty.txt load_to_memory empty.txt load_to_memory empty.txt remove_block 6 remove_block 7 remove_block 8 | tail -20 >> raport2.txt
 	make clean
