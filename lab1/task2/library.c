@@ -1,8 +1,8 @@
 #include "library.h"
 #include <stdlib.h>
 
-const int BUFFER_SIZE = 512;
-const char* TMP_FILE = "file.tmp";
+int BUFFER_SIZE = 512;
+char* TMP_FILE = "file.tmp";
 
 uint32_t ARR_LEN;
 char** ARR; 
@@ -28,8 +28,8 @@ long get_file_size(FILE* file){
     return size;
 }
 
-int load_to_memory(){
-    FILE* file_ptr = fopen(TMP_FILE, "r");
+int load_to_memory(char* file_name){
+    FILE* file_ptr = fopen(file_name, "r");
 
     if (file_ptr == NULL) {
         printf("ERROR: cannot open tmp file\n");
@@ -48,6 +48,7 @@ int load_to_memory(){
             return i;
         }
     }
+    
     free(buffer);
     printf("ERROR: No space left in array\n");
     return -1;
@@ -77,7 +78,7 @@ int wc_files(int file_count, char** file_names){
             system(buffer);
         }
         free(buffer);
-        int load_status = load_to_memory();
+        int load_status = load_to_memory(TMP_FILE);
 
         if (load_status < 0)
             return -1;

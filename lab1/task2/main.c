@@ -84,10 +84,11 @@ int main(int arg_len, char **args){
         return -1;
     }
 
-    char** funcs = calloc(3, sizeof(char*));
+    char** funcs = calloc(4, sizeof(char*));
     funcs[0] = "create_table";
     funcs[1] = "wc_files";
     funcs[2] = "remove_block";
+    funcs[3] = "load_to_memory";
 
     char* curr_func;
     char* curr_arg;
@@ -102,6 +103,7 @@ int main(int arg_len, char **args){
     int t = 0;
     while(i<arg_len){
         curr_func = args[i];
+        printf("%s\n", curr_func);
         i++;
         if (i == arg_len)
             break;
@@ -123,11 +125,15 @@ int main(int arg_len, char **args){
             wc_files(files_count, files_for_wc);
         }
 
-        else if (strcmp(curr_func, "remove_block")){
+        else if (strcmp(curr_func, "load_to_memory") == 0){
+            clock_start = times(&start_tms);
+            load_to_memory(curr_arg);
+        }
+        
+        else if (strcmp(curr_func, "remove_block") == 0){
             clock_start = times(&start_tms);
             remove_block(parse_str_to_uint(curr_arg));
         }
-        
         else {
             printf("ERROR: not defined function");
             return -1;
@@ -145,7 +151,9 @@ int main(int arg_len, char **args){
     c_end_main = times(&end_main);
     struct func_time curr_time_result = get_time_result(c_start_main, c_end_main, start_main, end_main, "main");
     time_results[t] = curr_time_result;
-
     print_times(time_results, funcs_count);
+
+    free(funcs);
+    free(time_results);
     return 0;
 }
