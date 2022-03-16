@@ -68,5 +68,17 @@ get_raport_2: clean just_static create_files
 	
 	echo "1 large file" >> raport2.txt
 	./out create_table 1 wc_files large5.txt | tail -3 >> raport2.txt
+	echo "\n" >> raport2.txt
+
+	echo "Loading small file" >> raport2.txt
+	./out create_table 1 load_to_memory small1.txt | tail -3 >> raport2.txt
+	echo "\n" >> raport2.txt
+
+	echo "Loading medium file" >> raport2.txt
+	./out create_table 1 load_to_memory medium1.txt | tail -3 >> raport2.txt
+	echo "\n" >> raport2.txt
+
+	echo "Loading large file" >> raport2.txt
+	./out create_table 1 load_to_memory large1.txt | tail -3 >> raport2.txt
 
 	make clean

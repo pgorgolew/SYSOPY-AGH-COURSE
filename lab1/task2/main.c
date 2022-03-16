@@ -29,7 +29,7 @@ uint32_t parse_str_to_uint(char* value){
 int count_files_for_wc(char** funcs, int i, int max_i, char** args){
     int to_i = i;
     while(to_i < max_i){
-        if (isInArr(args[to_i], funcs, 3))
+        if (isInArr(args[to_i], funcs, 4))
             break;
         to_i++;
     }
@@ -95,7 +95,7 @@ int main(int arg_len, char **args){
 
     int funcs_count = 1; //cause one is main func
     for (int j=1; j<arg_len; j++){
-        if (isInArr(args[j], funcs, 3) == 1)
+        if (isInArr(args[j], funcs, 4) == 1)
             funcs_count++;
     }
 
@@ -103,7 +103,6 @@ int main(int arg_len, char **args){
     int t = 0;
     while(i<arg_len){
         curr_func = args[i];
-        printf("%s\n", curr_func);
         i++;
         if (i == arg_len)
             break;
@@ -140,7 +139,6 @@ int main(int arg_len, char **args){
         }
 
         clock_end = times(&end_tms);
-
         i += add_to_i;
         curr_arg  = args[i];
         
