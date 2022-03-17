@@ -1,3 +1,3 @@
 Wyniki wydają się być losowe. Przy paru próbach puszczania testów, wyniki wychodziły zupełnie różne.
 
-Jest to prawdopodobnie spowodowanie użyciem wirtualnej maszyny.
+Jest to prawdopodobnie spowodowanie użyciem wirtualnej maszyny. 

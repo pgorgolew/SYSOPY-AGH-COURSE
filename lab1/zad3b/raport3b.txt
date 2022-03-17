@@ -1,0 +1,697 @@
+SMALL -> 10M; MEDIUM -> 50M; LARGE -> 100M
+
+-------------STATIC-------------
+
+-------------OPT=O0-------------
+
+5 small files
+create_table real: 0.000000, user: 0.000000, sys: 0.000000 
+wc_files real: 6.770000, user: 4.860000, sys: 0.030000 
+main real: 6.770000, user: 4.860000, sys: 0.030000 
+
+
+1 small file
+create_table real: 0.000000, user: 0.000000, sys: 0.000000 
+wc_files real: 1.000000, user: 0.920000, sys: 0.000000 
+main real: 1.000000, user: 0.920000, sys: 0.000000 
+
+
+5 medium files
+create_table real: 0.000000, user: 0.000000, sys: 0.000000 
+wc_files real: 15.600000, user: 14.790000, sys: 0.060000 
+main real: 15.600000, user: 14.790000, sys: 0.060000 
+
+
+1 medium file
+create_table real: 0.000000, user: 0.000000, sys: 0.000000 
+wc_files real: 3.160000, user: 3.070000, sys: 0.020000 
+main real: 3.160000, user: 3.070000, sys: 0.020000 
+
+
+5 large files
+create_table real: 0.000000, user: 0.000000, sys: 0.000000 
+wc_files real: 16.720000, user: 15.750000, sys: 0.080000 
+main real: 16.720000, user: 15.750000, sys: 0.080000 
+
+
+1 large file
+create_table real: 0.000000, user: 0.000000, sys: 0.000000 
+wc_files real: 3.160000, user: 3.100000, sys: 0.010000 
+main real: 3.160000, user: 3.100000, sys: 0.010000 
+
+
+Load and remove large file
+create_table real: 0.000000, user: 0.000000, sys: 0.000000 
+load_to_memory real: 0.020000, user: 0.000000, sys: 0.000000 
+remove_block real: 0.000000, user: 0.000000, sys: 0.000000 
+main real: 0.020000, user: 0.000000, sys: 0.000000 
+
+
+
+-------------OPT=O1-------------
+
+5 small files
+create_table real: 0.000000, user: 0.000000, sys: 0.000000 
+wc_files real: 5.240000, user: 4.670000, sys: 0.020000 
+main real: 5.240000, user: 4.670000, sys: 0.020000 
+
+
+1 small file
+create_table real: 0.000000, user: 0.000000, sys: 0.000000 
+wc_files real: 1.130000, user: 0.930000, sys: 0.000000 
+main real: 1.130000, user: 0.930000, sys: 0.000000 
+
+
+5 medium files
+create_table real: 0.000000, user: 0.000000, sys: 0.000000 
+wc_files real: 15.670000, user: 14.970000, sys: 0.060000 
+main real: 15.670000, user: 14.970000, sys: 0.060000 
+
+
+1 medium file
+create_table real: 0.000000, user: 0.000000, sys: 0.000000 
+wc_files real: 3.040000, user: 2.980000, sys: 0.010000 
+main real: 3.040000, user: 2.980000, sys: 0.010000 
+
+
+5 large files
+create_table real: 0.000000, user: 0.000000, sys: 0.000000 
+wc_files real: 15.580000, user: 14.910000, sys: 0.050000 
+main real: 15.580000, user: 14.910000, sys: 0.050000 
+
+
+1 large file
+create_table real: 0.000000, user: 0.000000, sys: 0.000000 
+wc_files real: 3.300000, user: 3.060000, sys: 0.010000 
+main real: 3.300000, user: 3.060000, sys: 0.010000 
+
+
+Load and remove large file
+create_table real: 0.000000, user: 0.000000, sys: 0.000000 
+load_to_memory real: 0.020000, user: 0.000000, sys: 0.000000 
+remove_block real: 0.000000, user: 0.000000, sys: 0.000000 
+main real: 0.020000, user: 0.000000, sys: 0.000000 
+
+
+
+-------------OPT=O2-------------
+
+5 small files
+create_table real: 0.000000, user: 0.000000, sys: 0.000000 
+wc_files real: 5.430000, user: 4.860000, sys: 0.000000 
+main real: 5.430000, user: 4.860000, sys: 0.000000 
+
+
+1 small file
+create_table real: 0.000000, user: 0.000000, sys: 0.000000 
+wc_files real: 0.980000, user: 0.940000, sys: 0.000000 
+main real: 0.980000, user: 0.940000, sys: 0.000000 
+
+
+5 medium files
+create_table real: 0.000000, user: 0.000000, sys: 0.000000 
+wc_files real: 16.120000, user: 15.350000, sys: 0.050000 
+main real: 16.120000, user: 15.350000, sys: 0.050000 
+
+
+1 medium file
+create_table real: 0.000000, user: 0.000000, sys: 0.000000 
+wc_files real: 3.220000, user: 2.950000, sys: 0.010000 
+main real: 3.220000, user: 2.950000, sys: 0.010000 
+
+
+5 large files
+create_table real: 0.000000, user: 0.000000, sys: 0.000000 
+wc_files real: 15.610000, user: 14.930000, sys: 0.060000 
+main real: 15.610000, user: 14.930000, sys: 0.060000 
+
+
+1 large file
+create_table real: 0.000000, user: 0.000000, sys: 0.000000 
+wc_files real: 3.250000, user: 3.010000, sys: 0.010000 
+main real: 3.250000, user: 3.010000, sys: 0.010000 
+
+
+Load and remove large file
+create_table real: 0.000000, user: 0.000000, sys: 0.000000 
+load_to_memory real: 0.020000, user: 0.000000, sys: 0.000000 
+remove_block real: 0.000000, user: 0.000000, sys: 0.000000 
+main real: 0.020000, user: 0.000000, sys: 0.000000 
+
+
+
+-------------OPT=O3-------------
+
+5 small files
+create_table real: 0.000000, user: 0.000000, sys: 0.000000 
+wc_files real: 5.240000, user: 4.680000, sys: 0.010000 
+main real: 5.240000, user: 4.680000, sys: 0.010000 
+
+
+1 small file
+create_table real: 0.000000, user: 0.000000, sys: 0.000000 
+wc_files real: 0.970000, user: 0.930000, sys: 0.000000 
+main real: 0.970000, user: 0.930000, sys: 0.000000 
+
+
+5 medium files
+create_table real: 0.000000, user: 0.000000, sys: 0.000000 
+wc_files real: 15.670000, user: 14.980000, sys: 0.060000 
+main real: 15.670000, user: 14.980000, sys: 0.060000 
+
+
+1 medium file
+create_table real: 0.000000, user: 0.000000, sys: 0.000000 
+wc_files real: 3.280000, user: 3.040000, sys: 0.010000 
+main real: 3.280000, user: 3.040000, sys: 0.010000 
+
+
+5 large files
+create_table real: 0.000000, user: 0.000000, sys: 0.000000 
+wc_files real: 15.720000, user: 15.050000, sys: 0.050000 
+main real: 15.720000, user: 15.050000, sys: 0.050000 
+
+
+1 large file
+create_table real: 0.000000, user: 0.000000, sys: 0.000000 
+wc_files real: 3.000000, user: 2.950000, sys: 0.000000 
+main real: 3.000000, user: 2.950000, sys: 0.000000 
+
+
+Load and remove large file
+create_table real: 0.000000, user: 0.000000, sys: 0.000000 
+load_to_memory real: 0.010000, user: 0.000000, sys: 0.000000 
+remove_block real: 0.000000, user: 0.000000, sys: 0.000000 
+main real: 0.010000, user: 0.000000, sys: 0.000000 
+
+
+
+-------------OPT=Os-------------
+
+5 small files
+create_table real: 0.000000, user: 0.000000, sys: 0.000000 
+wc_files real: 5.170000, user: 4.610000, sys: 0.010000 
+main real: 5.170000, user: 4.610000, sys: 0.010000 
+
+
+1 small file
+create_table real: 0.000000, user: 0.000000, sys: 0.000000 
+wc_files real: 1.140000, user: 0.930000, sys: 0.000000 
+main real: 1.140000, user: 0.930000, sys: 0.000000 
+
+
+5 medium files
+create_table real: 0.000000, user: 0.000000, sys: 0.000000 
+wc_files real: 15.900000, user: 15.020000, sys: 0.040000 
+main real: 15.900000, user: 15.020000, sys: 0.040000 
+
+
+1 medium file
+create_table real: 0.000000, user: 0.000000, sys: 0.000000 
+wc_files real: 3.000000, user: 2.950000, sys: 0.000000 
+main real: 3.000000, user: 2.950000, sys: 0.000000 
+
+
+5 large files
+create_table real: 0.000000, user: 0.000000, sys: 0.000000 
+wc_files real: 15.610000, user: 14.950000, sys: 0.060000 
+main real: 15.610000, user: 14.950000, sys: 0.060000 
+
+
+1 large file
+create_table real: 0.000000, user: 0.000000, sys: 0.000000 
+wc_files real: 3.370000, user: 3.130000, sys: 0.000000 
+main real: 3.370000, user: 3.130000, sys: 0.000000 
+
+
+Load and remove large file
+create_table real: 0.000000, user: 0.000000, sys: 0.000000 
+load_to_memory real: 0.020000, user: 0.000000, sys: 0.000000 
+remove_block real: 0.000000, user: 0.000000, sys: 0.000000 
+main real: 0.020000, user: 0.000000, sys: 0.000000 
+
+
+
+-------------SHARED-------------
+
+-------------OPT=O0-------------
+
+5 small files
+create_table real: 0.000000, user: 0.000000, sys: 0.000000 
+wc_files real: 5.390000, user: 4.740000, sys: 0.030000 
+main real: 5.390000, user: 4.740000, sys: 0.030000 
+
+
+1 small file
+create_table real: 0.000000, user: 0.000000, sys: 0.000000 
+wc_files real: 0.970000, user: 0.920000, sys: 0.000000 
+main real: 0.970000, user: 0.920000, sys: 0.000000 
+
+
+5 medium files
+create_table real: 0.000000, user: 0.000000, sys: 0.000000 
+wc_files real: 15.680000, user: 14.950000, sys: 0.050000 
+main real: 15.680000, user: 14.950000, sys: 0.050000 
+
+
+1 medium file
+create_table real: 0.000000, user: 0.000000, sys: 0.000000 
+wc_files real: 3.220000, user: 2.990000, sys: 0.000000 
+main real: 3.220000, user: 2.990000, sys: 0.000000 
+
+
+5 large files
+create_table real: 0.000000, user: 0.000000, sys: 0.000000 
+wc_files real: 15.570000, user: 14.900000, sys: 0.030000 
+main real: 15.570000, user: 14.900000, sys: 0.030000 
+
+
+1 large file
+create_table real: 0.010000, user: 0.000000, sys: 0.000000 
+wc_files real: 3.170000, user: 2.960000, sys: 0.000000 
+main real: 3.180000, user: 2.960000, sys: 0.000000 
+
+
+Load and remove large file
+create_table real: 0.000000, user: 0.000000, sys: 0.000000 
+load_to_memory real: 0.030000, user: 0.000000, sys: 0.000000 
+remove_block real: 0.000000, user: 0.000000, sys: 0.000000 
+main real: 0.030000, user: 0.000000, sys: 0.000000 
+
+
+
+-------------OPT=O1-------------
+
+5 small files
+create_table real: 0.000000, user: 0.000000, sys: 0.000000 
+wc_files real: 5.580000, user: 4.680000, sys: 0.010000 
+main real: 5.580000, user: 4.680000, sys: 0.010000 
+
+
+1 small file
+create_table real: 0.000000, user: 0.000000, sys: 0.000000 
+wc_files real: 0.990000, user: 0.950000, sys: 0.000000 
+main real: 0.990000, user: 0.950000, sys: 0.000000 
+
+
+5 medium files
+create_table real: 0.000000, user: 0.000000, sys: 0.000000 
+wc_files real: 15.980000, user: 15.270000, sys: 0.070000 
+main real: 15.980000, user: 15.270000, sys: 0.070000 
+
+
+1 medium file
+create_table real: 0.000000, user: 0.000000, sys: 0.000000 
+wc_files real: 3.430000, user: 3.160000, sys: 0.000000 
+main real: 3.430000, user: 3.160000, sys: 0.000000 
+
+
+5 large files
+create_table real: 0.000000, user: 0.000000, sys: 0.000000 
+wc_files real: 15.710000, user: 15.010000, sys: 0.060000 
+main real: 15.710000, user: 15.010000, sys: 0.060000 
+
+
+1 large file
+create_table real: 0.000000, user: 0.000000, sys: 0.000000 
+wc_files real: 3.080000, user: 3.020000, sys: 0.000000 
+main real: 3.080000, user: 3.020000, sys: 0.000000 
+
+
+Load and remove large file
+create_table real: 0.000000, user: 0.000000, sys: 0.000000 
+load_to_memory real: 0.020000, user: 0.000000, sys: 0.000000 
+remove_block real: 0.000000, user: 0.000000, sys: 0.000000 
+main real: 0.020000, user: 0.000000, sys: 0.000000 
+
+
+
+-------------OPT=O2-------------
+
+5 small files
+create_table real: 0.000000, user: 0.000000, sys: 0.000000 
+wc_files real: 5.150000, user: 4.640000, sys: 0.010000 
+main real: 5.150000, user: 4.640000, sys: 0.010000 
+
+
+1 small file
+create_table real: 0.000000, user: 0.000000, sys: 0.000000 
+wc_files real: 1.160000, user: 0.940000, sys: 0.000000 
+main real: 1.160000, user: 0.940000, sys: 0.000000 
+
+
+5 medium files
+create_table real: 0.000000, user: 0.000000, sys: 0.000000 
+wc_files real: 15.890000, user: 15.220000, sys: 0.030000 
+main real: 15.890000, user: 15.220000, sys: 0.030000 
+
+
+1 medium file
+create_table real: 0.000000, user: 0.000000, sys: 0.000000 
+wc_files real: 3.390000, user: 3.310000, sys: 0.020000 
+main real: 3.390000, user: 3.310000, sys: 0.020000 
+
+
+5 large files
+create_table real: 0.000000, user: 0.000000, sys: 0.000000 
+wc_files real: 17.060000, user: 15.950000, sys: 0.040000 
+main real: 17.060000, user: 15.950000, sys: 0.040000 
+
+
+1 large file
+create_table real: 0.000000, user: 0.000000, sys: 0.000000 
+wc_files real: 3.380000, user: 3.320000, sys: 0.000000 
+main real: 3.380000, user: 3.320000, sys: 0.000000 
+
+
+Load and remove large file
+create_table real: 0.000000, user: 0.000000, sys: 0.000000 
+load_to_memory real: 0.030000, user: 0.000000, sys: 0.000000 
+remove_block real: 0.000000, user: 0.000000, sys: 0.000000 
+main real: 0.030000, user: 0.000000, sys: 0.000000 
+
+
+
+-------------OPT=O3-------------
+
+5 small files
+create_table real: 0.000000, user: 0.000000, sys: 0.000000 
+wc_files real: 5.470000, user: 4.850000, sys: 0.030000 
+main real: 5.470000, user: 4.850000, sys: 0.030000 
+
+
+1 small file
+create_table real: 0.000000, user: 0.000000, sys: 0.000000 
+wc_files real: 1.150000, user: 0.930000, sys: 0.000000 
+main real: 1.150000, user: 0.930000, sys: 0.000000 
+
+
+5 medium files
+create_table real: 0.000000, user: 0.000000, sys: 0.000000 
+wc_files real: 15.920000, user: 15.250000, sys: 0.050000 
+main real: 15.920000, user: 15.250000, sys: 0.050000 
+
+
+1 medium file
+create_table real: 0.000000, user: 0.000000, sys: 0.000000 
+wc_files real: 3.240000, user: 3.180000, sys: 0.010000 
+main real: 3.240000, user: 3.180000, sys: 0.010000 
+
+
+5 large files
+create_table real: 0.000000, user: 0.000000, sys: 0.000000 
+wc_files real: 16.320000, user: 15.480000, sys: 0.050000 
+main real: 16.320000, user: 15.480000, sys: 0.050000 
+
+
+1 large file
+create_table real: 0.000000, user: 0.000000, sys: 0.000000 
+wc_files real: 3.450000, user: 3.360000, sys: 0.010000 
+main real: 3.450000, user: 3.360000, sys: 0.010000 
+
+
+Load and remove large file
+create_table real: 0.000000, user: 0.000000, sys: 0.000000 
+load_to_memory real: 0.020000, user: 0.000000, sys: 0.000000 
+remove_block real: 0.000000, user: 0.000000, sys: 0.000000 
+main real: 0.020000, user: 0.000000, sys: 0.000000 
+
+
+
+-------------OPT=Os-------------
+
+5 small files
+create_table real: 0.000000, user: 0.000000, sys: 0.000000 
+wc_files real: 5.850000, user: 5.170000, sys: 0.020000 
+main real: 5.850000, user: 5.170000, sys: 0.020000 
+
+
+1 small file
+create_table real: 0.000000, user: 0.000000, sys: 0.000000 
+wc_files real: 1.320000, user: 1.050000, sys: 0.010000 
+main real: 1.320000, user: 1.050000, sys: 0.010000 
+
+
+5 medium files
+create_table real: 0.000000, user: 0.000000, sys: 0.000000 
+wc_files real: 16.890000, user: 16.030000, sys: 0.060000 
+main real: 16.890000, user: 16.030000, sys: 0.060000 
+
+
+1 medium file
+create_table real: 0.000000, user: 0.000000, sys: 0.000000 
+wc_files real: 3.310000, user: 3.040000, sys: 0.000000 
+main real: 3.310000, user: 3.040000, sys: 0.000000 
+
+
+5 large files
+create_table real: 0.000000, user: 0.000000, sys: 0.000000 
+wc_files real: 16.240000, user: 15.500000, sys: 0.070000 
+main real: 16.240000, user: 15.500000, sys: 0.070000 
+
+
+1 large file
+create_table real: 0.000000, user: 0.000000, sys: 0.000000 
+wc_files real: 3.260000, user: 3.210000, sys: 0.000000 
+main real: 3.260000, user: 3.210000, sys: 0.000000 
+
+
+Load and remove large file
+create_table real: 0.000000, user: 0.000000, sys: 0.000000 
+load_to_memory real: 0.020000, user: 0.000000, sys: 0.000000 
+remove_block real: 0.010000, user: 0.000000, sys: 0.000000 
+main real: 0.030000, user: 0.000000, sys: 0.000000 
+
+
+
+-------------DDL-------------
+
+-------------OPT=O0-------------
+
+5 small files
+create_table real: 0.000000, user: 0.000000, sys: 0.000000 
+wc_files real: 5.900000, user: 5.140000, sys: 0.010000 
+main real: 5.900000, user: 5.140000, sys: 0.010000 
+
+
+1 small file
+create_table real: 0.000000, user: 0.000000, sys: 0.000000 
+wc_files real: 1.120000, user: 1.060000, sys: 0.000000 
+main real: 1.120000, user: 1.060000, sys: 0.000000 
+
+
+5 medium files
+create_table real: 0.000000, user: 0.000000, sys: 0.000000 
+wc_files real: 16.760000, user: 15.950000, sys: 0.050000 
+main real: 16.760000, user: 15.950000, sys: 0.050000 
+
+
+1 medium file
+create_table real: 0.000000, user: 0.000000, sys: 0.000000 
+wc_files real: 3.350000, user: 3.080000, sys: 0.010000 
+main real: 3.350000, user: 3.080000, sys: 0.010000 
+
+
+5 large files
+create_table real: 0.000000, user: 0.000000, sys: 0.000000 
+wc_files real: 17.080000, user: 16.260000, sys: 0.070000 
+main real: 17.080000, user: 16.260000, sys: 0.070000 
+
+
+1 large file
+create_table real: 0.000000, user: 0.000000, sys: 0.000000 
+wc_files real: 3.280000, user: 3.040000, sys: 0.000000 
+main real: 3.280000, user: 3.040000, sys: 0.000000 
+
+
+Load and remove large file
+create_table real: 0.000000, user: 0.000000, sys: 0.000000 
+load_to_memory real: 0.020000, user: 0.000000, sys: 0.000000 
+remove_block real: 0.000000, user: 0.000000, sys: 0.000000 
+main real: 0.020000, user: 0.000000, sys: 0.000000 
+
+
+
+-------------OPT=O1-------------
+
+5 small files
+create_table real: 0.000000, user: 0.000000, sys: 0.000000 
+wc_files real: 5.280000, user: 4.740000, sys: 0.000000 
+main real: 5.280000, user: 4.740000, sys: 0.000000 
+
+
+1 small file
+create_table real: 0.000000, user: 0.000000, sys: 0.000000 
+wc_files real: 1.010000, user: 0.960000, sys: 0.000000 
+main real: 1.010000, user: 0.960000, sys: 0.000000 
+
+
+5 medium files
+create_table real: 0.000000, user: 0.000000, sys: 0.000000 
+wc_files real: 16.790000, user: 15.860000, sys: 0.060000 
+main real: 16.790000, user: 15.860000, sys: 0.060000 
+
+
+1 medium file
+create_table real: 0.000000, user: 0.000000, sys: 0.000000 
+wc_files real: 4.130000, user: 3.050000, sys: 0.010000 
+main real: 4.130000, user: 3.050000, sys: 0.010000 
+
+
+5 large files
+create_table real: 0.000000, user: 0.000000, sys: 0.000000 
+wc_files real: 16.630000, user: 15.830000, sys: 0.050000 
+main real: 16.630000, user: 15.830000, sys: 0.050000 
+
+
+1 large file
+create_table real: 0.000000, user: 0.000000, sys: 0.000000 
+wc_files real: 3.540000, user: 3.260000, sys: 0.010000 
+main real: 3.540000, user: 3.260000, sys: 0.010000 
+
+
+Load and remove large file
+create_table real: 0.000000, user: 0.000000, sys: 0.000000 
+load_to_memory real: 0.020000, user: 0.000000, sys: 0.000000 
+remove_block real: 0.000000, user: 0.000000, sys: 0.000000 
+main real: 0.020000, user: 0.000000, sys: 0.000000 
+
+
+
+-------------OPT=O2-------------
+
+5 small files
+create_table real: 0.000000, user: 0.000000, sys: 0.000000 
+wc_files real: 6.130000, user: 5.090000, sys: 0.010000 
+main real: 6.130000, user: 5.090000, sys: 0.010000 
+
+
+1 small file
+create_table real: 0.000000, user: 0.000000, sys: 0.000000 
+wc_files real: 1.070000, user: 1.020000, sys: 0.000000 
+main real: 1.070000, user: 1.020000, sys: 0.000000 
+
+
+5 medium files
+create_table real: 0.000000, user: 0.000000, sys: 0.000000 
+wc_files real: 16.540000, user: 15.630000, sys: 0.050000 
+main real: 16.540000, user: 15.630000, sys: 0.050000 
+
+
+1 medium file
+create_table real: 0.000000, user: 0.000000, sys: 0.000000 
+wc_files real: 3.260000, user: 3.160000, sys: 0.020000 
+main real: 3.260000, user: 3.160000, sys: 0.020000 
+
+
+5 large files
+create_table real: 0.000000, user: 0.000000, sys: 0.000000 
+wc_files real: 16.860000, user: 16.010000, sys: 0.080000 
+main real: 16.860000, user: 16.010000, sys: 0.080000 
+
+
+1 large file
+create_table real: 0.000000, user: 0.000000, sys: 0.000000 
+wc_files real: 3.320000, user: 3.130000, sys: 0.000000 
+main real: 3.320000, user: 3.130000, sys: 0.000000 
+
+
+Load and remove large file
+create_table real: 0.000000, user: 0.000000, sys: 0.000000 
+load_to_memory real: 0.020000, user: 0.000000, sys: 0.000000 
+remove_block real: 0.000000, user: 0.000000, sys: 0.000000 
+main real: 0.020000, user: 0.000000, sys: 0.000000 
+
+
+
+-------------OPT=O3-------------
+
+5 small files
+create_table real: 0.000000, user: 0.000000, sys: 0.000000 
+wc_files real: 5.650000, user: 5.030000, sys: 0.010000 
+main real: 5.650000, user: 5.030000, sys: 0.010000 
+
+
+1 small file
+create_table real: 0.000000, user: 0.000000, sys: 0.000000 
+wc_files real: 1.340000, user: 1.080000, sys: 0.010000 
+main real: 1.340000, user: 1.080000, sys: 0.010000 
+
+
+5 medium files
+create_table real: 0.000000, user: 0.000000, sys: 0.000000 
+wc_files real: 16.980000, user: 16.120000, sys: 0.120000 
+main real: 16.980000, user: 16.120000, sys: 0.120000 
+
+
+1 medium file
+create_table real: 0.000000, user: 0.000000, sys: 0.000000 
+wc_files real: 3.280000, user: 3.130000, sys: 0.010000 
+main real: 3.280000, user: 3.130000, sys: 0.010000 
+
+
+5 large files
+create_table real: 0.000000, user: 0.000000, sys: 0.000000 
+wc_files real: 17.010000, user: 16.140000, sys: 0.080000 
+main real: 17.010000, user: 16.140000, sys: 0.080000 
+
+
+1 large file
+create_table real: 0.000000, user: 0.000000, sys: 0.000000 
+wc_files real: 3.120000, user: 3.050000, sys: 0.000000 
+main real: 3.120000, user: 3.050000, sys: 0.000000 
+
+
+Load and remove large file
+create_table real: 0.000000, user: 0.000000, sys: 0.000000 
+load_to_memory real: 0.020000, user: 0.000000, sys: 0.000000 
+remove_block real: 0.000000, user: 0.000000, sys: 0.000000 
+main real: 0.020000, user: 0.000000, sys: 0.000000 
+
+
+
+-------------OPT=Os-------------
+
+5 small files
+create_table real: 0.000000, user: 0.000000, sys: 0.000000 
+wc_files real: 5.550000, user: 4.830000, sys: 0.030000 
+main real: 5.550000, user: 4.830000, sys: 0.030000 
+
+
+1 small file
+create_table real: 0.000000, user: 0.000000, sys: 0.000000 
+wc_files real: 1.040000, user: 0.950000, sys: 0.000000 
+main real: 1.040000, user: 0.950000, sys: 0.000000 
+
+
+5 medium files
+create_table real: 0.000000, user: 0.000000, sys: 0.000000 
+wc_files real: 17.420000, user: 15.340000, sys: 0.080000 
+main real: 17.420000, user: 15.340000, sys: 0.080000 
+
+
+1 medium file
+create_table real: 0.000000, user: 0.000000, sys: 0.000000 
+wc_files real: 3.410000, user: 3.150000, sys: 0.000000 
+main real: 3.410000, user: 3.150000, sys: 0.000000 
+
+
+5 large files
+create_table real: 0.000000, user: 0.000000, sys: 0.000000 
+wc_files real: 16.140000, user: 15.450000, sys: 0.040000 
+main real: 16.140000, user: 15.450000, sys: 0.040000 
+
+
+1 large file
+create_table real: 0.000000, user: 0.000000, sys: 0.000000 
+wc_files real: 3.220000, user: 3.000000, sys: 0.000000 
+main real: 3.220000, user: 3.000000, sys: 0.000000 
+
+
+Load and remove large file
+create_table real: 0.000000, user: 0.000000, sys: 0.000000 
+load_to_memory real: 0.020000, user: 0.000000, sys: 0.000000 
+remove_block real: 0.000000, user: 0.000000, sys: 0.000000 
+main real: 0.020000, user: 0.000000, sys: 0.000000 
+
+

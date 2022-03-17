@@ -60,8 +60,8 @@ double time_in_s(clock_t clock_start, clock_t clock_end){
 struct func_time get_time_result(clock_t clock_start, clock_t clock_end, struct tms start_tms, struct tms end_tms, char* func_name){
     char* buffer = calloc(512, sizeof(char));
     double real = time_in_s(clock_start, clock_end);
-    double user = time_in_s(start_tms.tms_utime, end_tms.tms_utime);
-    double sys = time_in_s(start_tms.tms_stime, end_tms.tms_stime);
+    double user = time_in_s(start_tms.tms_cutime, end_tms.tms_cutime);
+    double sys = time_in_s(start_tms.tms_cstime, end_tms.tms_cstime);
     snprintf(buffer, 512, "real: %f, user: %f, sys: %f", real, user, sys);
     struct func_time curr_time_result = {func_name, buffer};
     return curr_time_result;
@@ -80,8 +80,7 @@ int main(int arg_len, char **args){
         int (*load_to_memory)(char*) = dlsym(handle, "load_to_memory");
         void (*create_table)(u_int32_t) = dlsym(handle, "create_table");
         int (*wc_files)(int, char**) = dlsym(handle, "wc_files");
-        void (*remove_block)(u_int32_t) = dlsym(handle, "remove_block");
-        
+        void (*remove_block)(u_int32_t) = dlsym(handle, "remove_block"); 
     #endif
 
     struct tms start_tms, end_tms, start_main, end_main;

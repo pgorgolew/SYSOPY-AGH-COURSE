@@ -1,16 +1,10 @@
+#include "library.h"
 #include <sys/times.h>
 #include <string.h>
 #include <stdlib.h>
 #include <time.h>
 #include <unistd.h>
 #include <stdio.h>
-
-#ifdef DDL
-    #include <dlfcn.h>
-#endif
-#ifndef DDL
-    #include "library.h"
-#endif
 
 struct func_time{
     char* func;
@@ -27,8 +21,9 @@ int isInArr(char* value, char** arr, int arr_len){
     return 0;
 }
 
-u_int32_t parse_str_to_uint(char* value){
-    return (u_int32_t) atoi(value);
+uint32_t parse_str_to_uint(char* value){
+    int arr_len_int = atoi(value);
+    return (uint32_t) arr_len_int;
 }
 
 int count_files_for_wc(char** funcs, int i, int max_i, char** args){
@@ -60,8 +55,8 @@ double time_in_s(clock_t clock_start, clock_t clock_end){
 struct func_time get_time_result(clock_t clock_start, clock_t clock_end, struct tms start_tms, struct tms end_tms, char* func_name){
     char* buffer = calloc(512, sizeof(char));
     double real = time_in_s(clock_start, clock_end);
-    double user = time_in_s(start_tms.tms_utime, end_tms.tms_utime);
-    double sys = time_in_s(start_tms.tms_stime, end_tms.tms_stime);
+    double user = time_in_s(start_tms.tms_cutime, end_tms.tms_cutime);
+    double sys = time_in_s(start_tms.tms_cstime, end_tms.tms_cstime);
     snprintf(buffer, 512, "real: %f, user: %f, sys: %f", real, user, sys);
     struct func_time curr_time_result = {func_name, buffer};
     return curr_time_result;
@@ -74,15 +69,6 @@ void print_times(struct func_time* results, int results_len){
 }
 
 int main(int arg_len, char **args){
-    #ifdef DDL
-        void *handle = dlopen("./liblib_wc.so", RTLD_LAZY);
-        if(!handle){/*error*/}
-        int (*load_to_memory)(char*) = dlsym(handle, "load_to_memory");
-        void (*create_table)(u_int32_t) = dlsym(handle, "create_table");
-        int (*wc_files)(int, char**) = dlsym(handle, "wc_files");
-        void (*remove_block)(u_int32_t) = dlsym(handle, "remove_block"); 
-    #endif
-
     struct tms start_tms, end_tms, start_main, end_main;
     clock_t clock_start, clock_end, c_start_main, c_end_main;
     c_start_main = times(&start_main);
@@ -112,6 +98,7 @@ int main(int arg_len, char **args){
         if (isInArr(args[j], funcs, 4) == 1)
             funcs_count++;
     }
+
     struct func_time* time_results = calloc(funcs_count, sizeof(struct func_time));
     int t = 0;
     while(i<arg_len){
@@ -123,6 +110,7 @@ int main(int arg_len, char **args){
         curr_arg = args[i];
         int add_to_i = 1;
 
+        
         if (strcmp(curr_func, "create_table") == 0){
             clock_start = times(&start_tms);
             create_table(parse_str_to_uint(curr_arg));
@@ -149,6 +137,7 @@ int main(int arg_len, char **args){
             printf("ERROR: not defined function");
             return -1;
         }
+
         clock_end = times(&end_tms);
         i += add_to_i;
         curr_arg  = args[i];
@@ -164,10 +153,5 @@ int main(int arg_len, char **args){
 
     free(funcs);
     free(time_results);
-
-    #ifdef DDL
-        dlclose(handle);
-    #endif
-
     return 0;
 }
