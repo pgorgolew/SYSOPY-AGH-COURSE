@@ -55,7 +55,7 @@ int load_to_memory(char* file_name){
 }
 
 int wc_files(int file_count, char** file_names){
-    uint32_t file_indexes[file_count];
+    u_int32_t file_indexes[file_count];
 
     if (ARR == NULL){
         printf("ERROR: create_table first!\n");
@@ -95,7 +95,7 @@ int wc_files(int file_count, char** file_names){
 }
 
 
-void remove_block(uint32_t index){
+void remove_block(u_int32_t index){
     if (index >= ARR_LEN){
         printf("ERROR: given index is too big. Max index is: %d\n", ARR_LEN-1);
         return;

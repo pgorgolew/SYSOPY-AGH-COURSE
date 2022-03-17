@@ -32,10 +32,6 @@ just_ddl: clean_without_test_files shared
 create_files:
 	bash generate.sh
 	
-valgrind_elo:
-	make just_static
-	valgrind --leak-check=yes -s ./out create_table 10 wc_files large5.txt medium10.txt small1.txt remove_block 0 
-
 test_all:
 	make create_files
 	echo "SMALL -> 10M; MEDIUM -> 50M; LARGE -> 100M\n" > ${RAPORT}
