@@ -1,3 +1,4 @@
-1) Wersja shared jest najszybsza
+1) Nie da się określić najszybszej wersji -> dla różnych ilości i wielkości plików wychodzą inne wyniki
 2) tworzenie tabel, usuwanie bloków następuje w czasie natychmiastowym
-3) DDL wydaje się być najwolniejsze
+
+Czasy są duże, prawdopodobnie przez to, że odpalane jest to na maszynie wirtualnej

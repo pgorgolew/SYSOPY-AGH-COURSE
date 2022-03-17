@@ -6,6 +6,10 @@
 #include <unistd.h>
 #include <stdio.h>
 
+#ifdef DDL
+#include <dlfcn.h>
+#endif
+
 struct func_time{
     char* func;
     char* time;
@@ -69,6 +73,16 @@ void print_times(struct func_time* results, int results_len){
 }
 
 int main(int arg_len, char **args){
+    #ifdef DDL
+    void *handle = dlopen("liblib_wc.so");
+    if(!handle){/*error*/}
+
+    int (*load_to_memory)(char*) = dlsym(handle, "load_to_memory");
+    void (*create_table)(uint32_t) = dlsym(handle, "create_table");
+    int (*wc_files)(int, char**) = dlsym(handle, "wc_files");
+    void (*remove_block)(uint32_t) = dlsym(handle, "remove_block");
+    #endif
+
     struct tms start_tms, end_tms, start_main, end_main;
     clock_t clock_start, clock_end, c_start_main, c_end_main;
     c_start_main = times(&start_main);
@@ -153,5 +167,10 @@ int main(int arg_len, char **args){
 
     free(funcs);
     free(time_results);
+
+    #ifdef DDL
+    dlclose(handle);
+    #endif
+
     return 0;
 }

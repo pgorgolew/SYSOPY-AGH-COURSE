@@ -25,8 +25,9 @@ just_static: clean_without_test_files static main
 just_shared: clean_without_test_files shared main
 	$(CC) main.o -o out -L. ./lib$(LIB_NAME).so -I .
 
-just_ddl: clean_without_test_files shared main 
-	$(CC) main.o -o out -L. ./lib$(LIB_NAME).so -I . -D DDL
+just_ddl: clean_without_test_files shared 
+	$(CC) -c main.c -D DDL
+	$(CC) -o out main.o -ldl -I . 
 
 create_files:
 	bash generate.sh
