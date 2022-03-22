@@ -1,0 +1,40 @@
+-----SYS TEST-----
+
+File with 300KB
+
+real 0.32
+user 0.08
+sys 0.17
+
+File with 600KB
+
+real 0.77
+user 0.27
+sys 0.25
+
+File with 900KB
+
+real 0.86
+user 0.37
+sys 0.41
+
+
+-----LIB TEST-----
+
+File with 300KB
+
+real 0.03
+user 0.01
+sys 0.00
+
+File with 600KB
+
+real 0.06
+user 0.03
+sys 0.00
+
+File with 900KB
+
+real 0.08
+user 0.05
+sys 0.00

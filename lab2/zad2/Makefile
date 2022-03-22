@@ -1,5 +1,5 @@
 CC = gcc -Wall
-REPORT = pomiar_zad_1.txt
+REPORT = pomiar_zad_2.txt
 
 main:
 	$(CC) -c main.c $(EXTRA)
@@ -15,7 +15,7 @@ lib:
 	make main EXTRA="-D LIB"
 
 run_with_time:
-	time -p ./out ${TEST} result.txt
+	time -p ./out X ${TEST}
 	
 test:
 	bash generate.sh
@@ -29,6 +29,7 @@ test:
 
 run_tests:
 	echo "\nFile with 300KB\n" >> ${REPORT}
+	
 	make run_with_time TEST=test_300.txt 2>> ${REPORT}
 	echo "\nFile with 600KB\n" >> ${REPORT}
 	make run_with_time TEST=test_600.txt 2>> ${REPORT}

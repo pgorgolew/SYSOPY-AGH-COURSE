@@ -5,7 +5,7 @@
 #include <unistd.h>
 #include <ctype.h>
 
-int write_without_black(char* to_copy_file, char* result_file){
+int count_chars(char* to_copy_file, char* result_file){
     char* buffor = calloc(1, sizeof(char));
     int out;
 
@@ -118,7 +118,7 @@ int main(int arg_len, char **args){
         result_file = args[2];
 
     printf("Loaded files are: to_copy_file -> %s and result_file -> %s\n", to_copy_file, result_file);
-    write_without_black(to_copy_file, result_file);
+    count_chars(to_copy_file, result_file);
 
     return 0;
 }
