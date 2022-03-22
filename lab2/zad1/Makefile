@@ -1,7 +1,12 @@
 CC = gcc -Wall
-LIB_NAME = lib_wc
-RAPORT = raport3b.txt
-OPT = O
 
-main: main.c
-	$(CC) -c main.c
+main:
+	$(CC) -c main.c 
+	$(CC) main.o -o out
+
+clean:
+	rm -f out main
+
+run:
+	make main
+	./out test.txt result.txt

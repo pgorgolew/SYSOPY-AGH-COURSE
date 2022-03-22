@@ -1,6 +1,8 @@
 #include <stdio.h>
 #include <fcntl.h>
 #include <sys/stat.h>
+#include <stdlib.h>
+#include <unistd.h>
 
 int MAX_LINE_LEN = 256;
 
@@ -9,11 +11,11 @@ int write_with_sys(char* to_copy_file, char* result_file){
     int out, reading_file, writing_file;
 
     reading_file = open(to_copy_file, O_RDONLY);
-    writing_file = open(result_file, O_WRONLY|O_CREAT);
+    writing_file = open(result_file, O_WRONLY|O_CREAT, S_IRUSR|S_IWUSR);
 
     //do reading and writing
-    char c;
-    while(out=read(reading_file, buffor, sizeof(buffor) > 0)){
+    out=read(reading_file, buffor, sizeof(buffor));
+    while(out > 0){
         char* line_to_write = calloc(MAX_LINE_LEN+2, sizeof(char));
         int is_new_line, new_line_index = 0;
         for (int i=0; i<out; i++){
@@ -37,7 +39,11 @@ int write_with_sys(char* to_copy_file, char* result_file){
                     is_new_line = 0;
             }
         }
+        printf("%s\n", buffor);
+        out=read(reading_file, buffor, sizeof(buffor));
+        free(line_to_write);
     }
+    free(buffor);
 
     // close here
     close(reading_file);
@@ -48,7 +54,7 @@ int write_with_sys(char* to_copy_file, char* result_file){
 
 
 int main(int arg_len, char **args){
-    int i = 1; //first arg is './main'
+    //first arg is './main'
     if (arg_len > 3){
         printf("ERROR: Too many arguments given. Only need file_to_copy and result_file! ");
         return -1;
@@ -82,4 +88,5 @@ int main(int arg_len, char **args){
         write_with_sys(to_copy_file, result_file);
     #endif
 
+    return 0;
 }

@@ -2,56 +2,56 @@ SMALL -> 10M; MEDIUM -> 50M; LARGE -> 100M
 
 10 small files
 create_table real: 0.000000, user: 0.000000, sys: 0.000000 
-wc_files real: 12.420000, user: 9.740000, sys: 0.060000 
-main real: 12.420000, user: 9.740000, sys: 0.060000 
+wc_files real: 14.230000, user: 9.730000, sys: 0.100000 
+main real: 14.230000, user: 9.730000, sys: 0.100000 
 
 
 5 small files
 create_table real: 0.000000, user: 0.000000, sys: 0.000000 
-wc_files real: 5.070000, user: 4.910000, sys: 0.030000 
-main real: 5.070000, user: 4.910000, sys: 0.030000 
+wc_files real: 5.020000, user: 4.720000, sys: 0.010000 
+main real: 5.020000, user: 4.720000, sys: 0.010000 
 
 
 1 small file
 create_table real: 0.000000, user: 0.000000, sys: 0.000000 
-wc_files real: 1.000000, user: 0.950000, sys: 0.000000 
-main real: 1.000000, user: 0.950000, sys: 0.000000 
+wc_files real: 0.980000, user: 0.910000, sys: 0.000000 
+main real: 0.980000, user: 0.910000, sys: 0.000000 
 
 
 10 medium files
 create_table real: 0.000000, user: 0.000000, sys: 0.000000 
-wc_files real: 32.700000, user: 32.090000, sys: 0.240000 
-main real: 32.700000, user: 32.090000, sys: 0.240000 
+wc_files real: 40.820000, user: 30.240000, sys: 0.140000 
+main real: 40.820000, user: 30.240000, sys: 0.140000 
 
 
 5 medium files
 create_table real: 0.000000, user: 0.000000, sys: 0.000000 
-wc_files real: 16.150000, user: 15.830000, sys: 0.150000 
-main real: 16.150000, user: 15.830000, sys: 0.150000 
+wc_files real: 18.810000, user: 15.400000, sys: 0.100000 
+main real: 18.810000, user: 15.400000, sys: 0.100000 
 
 
 1 medium file
 create_table real: 0.000000, user: 0.000000, sys: 0.000000 
-wc_files real: 3.190000, user: 3.120000, sys: 0.010000 
-main real: 3.190000, user: 3.120000, sys: 0.010000 
+wc_files real: 3.310000, user: 2.990000, sys: 0.000000 
+main real: 3.310000, user: 2.990000, sys: 0.000000 
 
 
 10 large files
 create_table real: 0.000000, user: 0.000000, sys: 0.000000 
-wc_files real: 33.600000, user: 31.800000, sys: 0.160000 
-main real: 33.600000, user: 31.800000, sys: 0.160000 
+wc_files real: 39.980000, user: 30.580000, sys: 0.110000 
+main real: 39.980000, user: 30.580000, sys: 0.110000 
 
 
 5 large files
 create_table real: 0.000000, user: 0.000000, sys: 0.000000 
-wc_files real: 16.010000, user: 15.720000, sys: 0.120000 
-main real: 16.010000, user: 15.720000, sys: 0.120000 
+wc_files real: 17.240000, user: 15.060000, sys: 0.100000 
+main real: 17.240000, user: 15.060000, sys: 0.100000 
 
 
 1 large file
 create_table real: 0.000000, user: 0.000000, sys: 0.000000 
-wc_files real: 3.330000, user: 3.180000, sys: 0.010000 
-main real: 3.330000, user: 3.180000, sys: 0.010000 
+wc_files real: 3.680000, user: 3.110000, sys: 0.020000 
+main real: 3.680000, user: 3.110000, sys: 0.020000 
 
 
 Loading and remove small file
@@ -64,15 +64,15 @@ main real: 0.000000, user: 0.000000, sys: 0.000000
 Loading and remove medium file
 create_table real: 0.000000, user: 0.000000, sys: 0.000000 
 load_to_memory real: 0.020000, user: 0.000000, sys: 0.000000 
-remove_block real: 0.000000, user: 0.000000, sys: 0.000000 
-main real: 0.020000, user: 0.000000, sys: 0.000000 
+remove_block real: 0.010000, user: 0.000000, sys: 0.000000 
+main real: 0.030000, user: 0.000000, sys: 0.000000 
 
 
 Load and remove large file
 create_table real: 0.000000, user: 0.000000, sys: 0.000000 
-load_to_memory real: 0.030000, user: 0.000000, sys: 0.000000 
+load_to_memory real: 0.020000, user: 0.000000, sys: 0.000000 
 remove_block real: 0.000000, user: 0.000000, sys: 0.000000 
-main real: 0.030000, user: 0.000000, sys: 0.000000 
+main real: 0.020000, user: 0.000000, sys: 0.000000 
 
 
 3x(3xload then 3xremove)
