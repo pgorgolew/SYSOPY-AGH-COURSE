@@ -9,8 +9,8 @@ clean:
 
 run_default:
 	make main
-	./out ..
+	./out ../..
 
 run_nftw:
 	make main EXTRA="-D NFTW"
-	./out ..
+	./out ../..
