@@ -7,6 +7,10 @@ main:
 clean:
 	rm -f out main.o
 
-run:
+run_default:
 	make main
+	./out ..
+
+run_nftw:
+	make main EXTRA="-D NFTW"
 	./out ..
