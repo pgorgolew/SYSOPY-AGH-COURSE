@@ -132,36 +132,9 @@ int listFiles(const char* dirname) {
 }
 
 int main(int argc, char* argv[]) {
-    //zal ze arv[1] to sciezka
     char total_path[MAX_PATH_LEN];
-    /*aint snprintf_result;
-    if (argv[1][0] == '/')    
-        snprintf_result = snprintf(total_path, MAX_PATH_LEN, "%s", argv[1]);
-    else{
-        char cwd[MAX_PATH_LEN];
-        if (getcwd(cwd, sizeof(cwd)) == NULL){
-            printf("ERROR: getcwd() error");
-            return 1;
-        }
-
-        if (strcmp(argv[1], ".") == 0)
-            snprintf_result = snprintf(total_path, MAX_PATH_LEN, "%s", cwd);
-        else if (strcmp(argv[1], "..") == 0)
-            snprintf_result = snprintf(total_path, MAX_PATH_LEN, "%s", path_without_last_dir(cwd));
-        else  
-            snprintf_result = snprintf(total_path, MAX_PATH_LEN, "%s/%s", cwd, argv[1]);
-    }
-    
-    printf("total_path -> %s    GIVEN -> %s\n\n", total_path, argv[1]);
-    if (snprintf_result < 0 || snprintf_result > MAX_PATH_LEN){
-        printf("ERROR: snprintf error, return %d", snprintf_result);
-        return 1;
-    }*/
-
     realpath(argv[1], total_path);
-
     printf("NLINKS\tTYPE\t\tSIZE\tLAST_ACCES\t\tLAST_MODIFICATION\tABS_PATH\n");
-
     #ifdef NFTW
         nftw(total_path, parse_nftw_res, 20, 0);
     #else
