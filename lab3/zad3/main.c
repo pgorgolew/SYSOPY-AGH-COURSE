@@ -62,7 +62,6 @@ int listFiles(const char* dirname, int depth_left) {
                 listFiles(entity_path, depth_left-1);
                 return 0;
             }
-                
         }
 
         else if (S_ISREG(entity_stat.st_mode) && extension != NULL && strcmp(extension, ".txt") == 0)
