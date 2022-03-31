@@ -9,4 +9,4 @@ clean:
 	rm -f out main.o 
 
 run:
-	./out .. sys 3
+	./out .. PARAFRAZA 3

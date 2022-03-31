@@ -15,26 +15,13 @@ int pattern_len;
 
 void is_pattern(char* path){
     FILE* file = fopen(path, "r");
-    char* buffor = calloc(pattern_len+1, sizeof(char));
-    int out, tmp, curr_char=0;
-    char first = pattern[0];
-    while((out=fread(buffor, 1, pattern_len+1, file)) >= pattern_len){
-        tmp = curr_char;
-        if (strcmp(buffor, pattern) == 0){
+    char* buffor = calloc(MAX_PATH_LEN, sizeof(char));
+
+    while(fgets(buffor, MAX_PATH_LEN*sizeof(char), file)){
+        if (strstr(buffor,pattern)){
             printf("PATH: %s\tPID:%d\n", path, getpid());
-            break;
+            break;    
         }
-
-        for (int i=1; i<=pattern_len; i++){
-            if (buffor[i] == first){
-                curr_char += i;
-                fseek(file, curr_char, SEEK_SET);
-                break;
-            }
-        }
-
-        if (tmp == curr_char)
-            curr_char+=pattern_len+1;
     }
 
     fclose(file);
@@ -63,28 +50,24 @@ int listFiles(const char* dirname, int depth_left) {
         int snprintf_result = snprintf(entity_path, MAX_PATH_LEN, "%s/%s", dirname, entity->d_name);
         
         lstat(entity_path, &entity_stat);
-        
         if (snprintf_result < 0 || snprintf_result > MAX_PATH_LEN){
             printf("ERROR: snprintf error, return %d", snprintf_result);
             return 1;
         }
 
+        char* extension = strrchr(entity->d_name,'.');
         if (entity->d_type == DT_DIR && depth_left > 0) {
-            char path[MAX_PATH_LEN];
-            int snprintf_result = snprintf(path, MAX_PATH_LEN, "%s/%s", dirname, entity->d_name);
-            
-            if (snprintf_result < 0 || snprintf_result > MAX_PATH_LEN){
-                printf("ERROR: snprintf error, return %d", snprintf_result);
-                return 1;
-            }
             processes++;
-            if (fork() == 0)
-                listFiles(path, depth_left-1);
-            
+            if (fork() == 0){
+                listFiles(entity_path, depth_left-1);
+                return 0;
+            }
+                
         }
-        else if (S_ISREG(entity_stat.st_mode)){
+
+        else if (S_ISREG(entity_stat.st_mode) && extension != NULL && strcmp(extension, ".txt") == 0)
             is_pattern(entity_path);
-        }
+        
         entity = readdir(dir);
     }
 
