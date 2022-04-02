@@ -1,0 +1,8 @@
+Wnioski dla forkowania:
+ - Sygnał czekający w procesie rodzica, nie oczekuje u dziecka
+ - Proces dziecko dziedziczy maskę oraz handler
+
+ Wnioski dla exec:
+ - Sygnał ignorowany nadal jest ignorowane
+ - Sygnał oczekujący nadal jest oczekujący
+ - Exec dziedziczy maskę
