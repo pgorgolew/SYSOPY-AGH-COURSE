@@ -1,0 +1,60 @@
+```
+---- TESTING SA_SIGINFO ----
+
+1) Raise SIGUSR1
+> Signal number: 10
+> Process ID of sending process 8851
+> Real user ID of sending process 1000
+> Exit value or signal for process termination 0
+> Signal value 0
+
+2) Sigqueue SIGUSR2
+> Signal number: 12
+> Process ID of sending process 8851
+> Real user ID of sending process 1000
+> Exit value or signal for process termination 99
+> Signal value 99
+
+3) Raise SIGCHLD 
+> Signal number: 17
+> Process ID of sending process 8852
+> Real user ID of sending process 1000
+> Exit value or signal for process termination 0
+> Signal value 0
+```
+
+1) Zwykłe wywołanie raise()
+2) Użycie Sigqueue - oczekiwany sygnał 99 (taki był podany w kodzie)
+3) Wykorzystanie SIGCHLD, fork() i return.
+
+```
+---- TESTING SA_NODEFER ----
+
+[STARTED] Nodeferer number: 0
+[STARTED] Nodeferer number: 1
+[STARTED] Nodeferer number: 2
+[STARTED] Nodeferer number: 3
+[STARTED] Nodeferer number: 4
+[FINISHED] Nodeferer number: 4
+[FINISHED] Nodeferer number: 3
+[FINISHED] Nodeferer number: 2
+[FINISHED] Nodeferer number: 1
+[FINISHED] Nodeferer number: 0
+```
+
+Flaga SA_NODEFER powoduje możliwość zagnieżdzania się sygnałów. Bez tej flagi, wynik byłby naprzemiennie STARTED, FINISHED.
+Nie  chroni  sygnałów  przed  ich  odebraniem  z ich własnej procedury obsługi ~ http://manpages.ubuntu.com/manpages/trusty/pl/man2/sigaction.2.html
+
+```
+---- TESTING SA_NOCLDSTOP ----
+
+Sleeping for 5s 
+Should be no info from child
+```
+
+Flaga SA_NOCLDSTOP sprawia, że nie są odbierane powiadomienia o zatrzymaniu procesu dziecka (SIGSTOP). Przez to, czekanie poprzez wait() trwałoby w nieskończoność
+
+Jeśli  signum  jest  równy  SIGCHLD, to dzieci po swoim zakończeniu nie zostaną
+przekształcone w zombie. Patrz także waitpid(2). Znacznik  ma  znaczenie  tylko
+ustanawiania  funkcji  obsługującej  sygnał SIGCHLD lub podczas ustawiania tego
+sygnału na SIG_DLF. ~ http://manpages.ubuntu.com/manpages/trusty/pl/man2/sigaction.2.html
