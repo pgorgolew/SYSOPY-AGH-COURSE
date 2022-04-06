@@ -1,11 +1,17 @@
 CC = gcc -Wall
+LIB_NAME = libfunctions
 
-main:
-	$(CC) -c main.c $(EXTRA)
-	$(CC) main.o -o out
+sender: lib
+	$(CC) -c sender.c
+	$(CC) sender.o $(LIB_NAME).a -o sender
 
-run: main
-	./out
+catcher:
+	$(CC) -c catcher.c
+	$(CC) catcher.o $(LIB_NAME).a -o catcher
+
+lib:
+	$(CC) -c functions.c -o $(LIB_NAME).o
+	ar rcs $(LIB_NAME).a $(LIB_NAME).o
 
 clean:
-	rm -f *out *.o 
+	rm -f catcher sender *.o  *.a

@@ -4,6 +4,7 @@
 #include <unistd.h>
 #include <string.h>
 #include <wait.h>
+#include "functions.h"
 
 int received_signals = 0;
 int sigusr1_sent = 1;
@@ -25,16 +26,26 @@ int main(int arg_len, char **args){
 
     char* mode = args[1];
 
-    printf("[CATCHER] Catcher PID: %d", getpid());
+    printf("[CATCHER] Catcher PID: %d\n", getpid());
 
     struct sigaction act;
     sigcation_set(act, handler, mode);
 
+    sigset_t mask = init_mask(mode);
     while(sigusr1_sent){
-        sigsuspend
+        sigsuspend(&mask);
     }
 
-    //wysylaj
+    printf("[CATCHER] Already received %d signals\n", received_signals);
 
-    //naura
+    for (int i=0; i<received_signals; i++){
+        send_signal(sender_pid, mode, SIGUSR1);
+    }
+
+    printf("[CATCHER] Already sent %d signals\n", received_signals);
+    send_signal(sender_pid, mode, SIGUSR2);
+    printf("[CATCHER] Finish sending with SIGUSR2\n");
+
+    printf("[CATCHER] Turn off\n");
+    return 0;
 }
