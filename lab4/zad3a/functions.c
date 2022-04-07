@@ -14,7 +14,7 @@ int send_signal(int catcher_pid, char* mode, int flag){
         sigqueue(catcher_pid, flag, signal_value);
     }
     else if (strcmp("sigrt", mode) == 0){
-        kill(catcher_pid, SIGRTMIN + flag - 29);  //sigusr1=30, sigusr2=31
+        kill(catcher_pid, flag);
     }
     else {
         printf("ERROR: Unrecognized mode!\n");
@@ -32,8 +32,8 @@ void sigcation_update(struct sigaction act, void (*func)(), int flag, int sig_no
 
 void sigcation_set(struct sigaction act, void (*handler)(), char* mode){
     if (strcmp("sigrt", mode) == 0){
+        sigcation_update(act, handler, SA_SIGINFO, SIGRTMIN);
         sigcation_update(act, handler, SA_SIGINFO, SIGRTMIN+1);
-        sigcation_update(act, handler, SA_SIGINFO, SIGRTMIN+2);
     }
     else{
         sigcation_update(act, handler, SA_SIGINFO, SIGUSR1);
@@ -43,14 +43,14 @@ void sigcation_set(struct sigaction act, void (*handler)(), char* mode){
 
 sigset_t init_mask(char* mode){
     sigset_t mask;
-    sigemptyset(&mask);
+    sigfillset(&mask);
     if (strcmp("sigrt", mode) == 0){
-        sigaddset(&mask, SIGRTMIN+1);
-        sigaddset(&mask, SIGRTMIN+2);
+        sigdelset(&mask, SIGRTMIN);
+        sigdelset(&mask, SIGRTMIN+1);
     }
     else{
-        sigaddset(&mask, SIGUSR1);
-        sigaddset(&mask, SIGUSR2);
+        sigdelset(&mask, SIGUSR1);
+        sigdelset(&mask, SIGUSR2);
     }
     return mask;
 }
