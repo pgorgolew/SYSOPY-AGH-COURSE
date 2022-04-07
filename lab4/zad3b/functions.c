@@ -56,16 +56,16 @@ sigset_t init_mask(char* mode){
 }
 
 void block_signals(char* mode){
-	sigset_t blockSet;
+	sigset_t block_sigset;
 
     if (strcmp("sigrt", mode) == 0){
-        sigaddset(&blockSet, SIGRTMIN);
-        sigaddset(&blockSet, SIGRTMIN+1);
+        sigaddset(&block_sigset, SIGRTMIN);
+        sigaddset(&block_sigset, SIGRTMIN+1);
     }
     else {
-        sigaddset(&blockSet, SIGUSR2);
-        sigaddset(&blockSet, SIGUSR1);
+        sigaddset(&block_sigset, SIGUSR2);
+        sigaddset(&block_sigset, SIGUSR1);
     }
     
-	sigprocmask(SIG_BLOCK, &blockSet, NULL);
+	sigprocmask(SIG_BLOCK, &block_sigset, NULL);
 }

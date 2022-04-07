@@ -51,7 +51,7 @@ int main(int arg_len, char **args){
 
     printf("[CATCHER] Already sent %d signals\n", received_signals);
     send_signal(sender_pid, mode, finishing_flag);
-    printf("[CATCHER] Finish sending with SIGUSR2/SIGRTMIN+1\\n");
+    printf("[CATCHER] Finish sending with SIGUSR2/SIGRTMIN+1\n");
     printf("[CATCHER] Turn off\n");
     return 0;
 }

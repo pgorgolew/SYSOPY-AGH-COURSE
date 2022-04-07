@@ -37,6 +37,8 @@ int main(int arg_len, char **args){
     struct sigaction act;
     sigcation_set(act, handler, mode);
 
+    sigset_t mask = init_mask(mode);
+
     for (int i=0; i<signals_num; i++)
         send_signal(catcher_pid, mode, sending_flag);
 
@@ -44,7 +46,6 @@ int main(int arg_len, char **args){
     printf("[SENDER] Finish sending with SIGUSR2/SIGRTMIN+1\n");
     send_signal(catcher_pid, mode, finishing_flag);
 
-    sigset_t mask = init_mask(mode);
     while(sigusr1_sent){
         sigsuspend(&mask);
     }
