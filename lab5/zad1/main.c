@@ -64,28 +64,23 @@ void execute_cmd(char** file_lines, int cmd_id){
     int* cmd_ids = (int*) calloc(MAX_CMDS, sizeof(int));
     int cmds_num = parse_cmd(file_lines[cmd_id], cmd_ids);
     int pipes[MAX_CMD_ARGS][2];
-    for (int i = 0; i < cmds_num; i++) {
-        if (pipe(pipes[i]) < 0) {
-            printf("ERROR: Pipe problem\n");
-        }
-    }
+    for (int i = 0; i < cmds_num; i++)
+        pipe(pipes[i]);
 
     for (int i = 0; i < cmds_num; i++) {
         pid_t pid = fork();
         if (pid == 0) {
-            if (i != cmds_num - 1) {
-                dup2(pipes[i][1], STDOUT_FILENO);
-            }
+            if (i != cmds_num - 1) 
+                dup2(pipes[i][WRITE], STDOUT_FILENO);
 
-            if (i != 0) {
-                dup2(pipes[i - 1][0], STDIN_FILENO);
-            }
+            if (i != 0) 
+                dup2(pipes[i-1][READ], STDIN_FILENO);
 
             for (int j = 0; j < cmds_num; j++) {
-                close(pipes[j][0]);
-                close(pipes[j][1]);
+                close(pipes[j][READ]);
+                close(pipes[j][WRITE]);
             }
-            //printf("\n%s\n%s\n%s\n%s\n", file_lines[0], file_lines[1], file_lines[2], file_lines[3]);
+            
             char** cmd_args = (char**)calloc(MAX_CMD_ARGS, sizeof(char*));
             char* cmd_with_args = file_lines[cmd_ids[i]];
             char* token = strtok(cmd_with_args, " ");
@@ -103,13 +98,11 @@ void execute_cmd(char** file_lines, int cmd_id){
         }
     }
 
-    for (int i = 0; i < cmds_num; i++) {
+    for (int i = 0; i < cmds_num; i++) 
         close(pipes[i][1]);
-    }
 
-    for (int i = 0; i < cmds_num; i++) {
-        wait(0);
-    }
+    int status;
+    while (wait(&status) > 0);
 }
 
 int execute_commands(char** file_lines, int first_execute_index){
