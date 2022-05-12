@@ -1,0 +1,2 @@
+- srand(getpid()) daje nam każdy inny seed dla kucharza. Dzięki temu, mamy zupełną losowość tworzonych pizz (początkowo przypisałem 1234, więc początkowe pizze były takie same)
+- dla n,m > 5, pracownicy mają przerwy w pracy, ponieważ kucharze muszą czekać na miejsce w piecu lub na stole, zaś dostawcy na nowe pizzy na stole
