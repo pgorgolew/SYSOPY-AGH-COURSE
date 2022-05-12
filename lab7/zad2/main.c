@@ -1,11 +1,13 @@
 #include "functions.h"
 
-int shm_oven_id, shm_table_id, sem_id;
-
-void sigint_handler(int signum){
-    set_sem_value(sem_id, 0, IPC_RMID, 0);
-    shmctl_exec(shm_oven_id, IPC_RMID, NULL);
-    shmctl_exec(shm_table_id, IPC_RMID, NULL);
+void sigint_handler(){
+    sem_unlink_exec(OVEN_SEM);
+    sem_unlink_exec(TABLE_SEM);
+    sem_unlink_exec(FULL_OVEN_SEM);
+    sem_unlink_exec(FULL_TABLE_SEM);
+    sem_unlink_exec(EMPTY_TABLE_SEM);
+    shm_unlink_exec(TABLE_PATH);
+    shm_unlink_exec(OVEN_PATH);
 }
 
 void set_oven(oven* oven){
@@ -27,14 +29,14 @@ void set_table(table* table){
 }
 
 void create_shared_memory(){
-    key_t oven_key = get_key(OVEN_PATH, OVEN_ID);
-    key_t table_key = get_key(TABLE_PATH, TABLE_ID);
+    int shm_table_fd = shm_open_exec(TABLE_PATH, O_RDWR | O_CREAT, 0666);
+    int shm_oven_fd = shm_open_exec(OVEN_PATH, O_RDWR | O_CREAT, 0666);
 
-    shm_oven_id = shmget_exec(oven_key, sizeof(oven), IPC_CREAT | 0666);
-    shm_table_id = shmget_exec(table_key, sizeof(table), IPC_CREAT | 0666);
+    ftruncate_exec(shm_table_fd, sizeof(table));
+    ftruncate_exec(shm_oven_fd, sizeof(oven));
 
-    oven* oven = shmat(shm_oven_id, NULL, 0);
-    table* table = shmat(shm_table_id, NULL, 0);
+    oven* oven = mmap_exec(NULL, sizeof(oven), PROT_READ | PROT_WRITE, MAP_SHARED, shm_oven_fd, 0);
+    table* table = mmap_exec(NULL, sizeof(table), PROT_READ | PROT_WRITE, MAP_SHARED, shm_table_fd, 0);
 
     set_oven(oven);
     set_table(table);
@@ -43,14 +45,11 @@ void create_shared_memory(){
 }
 
 void set_sem_values(){
-    key_t key = get_key(get_home_path(), SEM_ID);
-    sem_id = semget_exec(key, 5, IPC_CREAT | 0666);
-
-    set_sem_value(sem_id, OVEN_SEM, SETVAL, 1); // 1 to enable only one cook to do something (when cook do sth, he sets it to 0)
-    set_sem_value(sem_id, TABLE_SEM, SETVAL, 1); // 1 to enable only one worker to do something (when worker do sth, he sets it to 0)
-    set_sem_value(sem_id, FULL_OVEN_SEM, SETVAL, MAX_PIZZAS); // if oven is full (val is 0), block cooks to place new pizzas
-    set_sem_value(sem_id, FULL_TABLE_SEM, SETVAL, MAX_PIZZAS); // if table is full (val is 0), block cooks to take out pizza
-    set_sem_value(sem_id, EMPTY_TABLE_SEM, SETVAL, 0); // if table is empty (val is 0), block suppliers to get and deliver pizza
+    sem_open_exec(OVEN_SEM, O_CREAT, 0666, 1);
+    sem_open_exec(TABLE_SEM, O_CREAT, 0666, 1);
+    sem_open_exec(FULL_OVEN_SEM, O_CREAT, 0666, MAX_PIZZAS);
+    sem_open_exec(FULL_TABLE_SEM, O_CREAT, 0666, MAX_PIZZAS);
+    sem_open_exec(EMPTY_TABLE_SEM, O_CREAT, 0666, 0);
 }
 
 void start_workers(int amount_of_cooks, int amount_of_suppliers){
@@ -65,7 +64,6 @@ void start_workers(int amount_of_cooks, int amount_of_suppliers){
         if (pid == 0)
             execl("./supplier", "./supplier", NULL);
     }
-
 }
 
 int main(int argc, char* argv[]){

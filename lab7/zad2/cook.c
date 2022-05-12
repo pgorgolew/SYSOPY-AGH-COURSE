@@ -28,7 +28,7 @@ void put_on_table(table* table, int type){
     table->id_to_add_pizza = (table->id_to_add_pizza + 1) % MAX_PIZZAS;
 }
 
-void work(int sem_id, oven* oven, table* table){
+void work(oven* oven, table* table, sem_t* oven_sem, sem_t* table_sem, sem_t* full_oven_sem, sem_t* full_table_sem, sem_t* empty_table_sem){
     int pizza_type;
     srand(getpid()); //getpid to have different pizzas for different cooks
     while(true){
@@ -43,29 +43,28 @@ void work(int sem_id, oven* oven, table* table){
         printf("[COOK]\t\t pid: %d time: %s\tinfo: Przygotowuje pizze: %d\n", getpid(), get_current_time(), pizza_type);
         sleep(preparation_time);
 
-        change_sem(sem_id, FULL_OVEN_SEM, -1); // decrement value of full_oven to block baking if value is 0  
+        change_sem(full_oven_sem, sem_wait); // decrement value of full_oven to block baking if value is 0  
 
-        change_sem(sem_id, OVEN_SEM, -1);
+        change_sem(oven_sem, &sem_wait);
         put_in_oven(oven, pizza_type);
         printf("[COOK]\t\t pid: %d time: %s\tinfo: Dodałem pizze: %d. Liczba pizz w piecu: %d.\n", getpid(), get_current_time(), pizza_type, oven->pizza_count);
-        change_sem(sem_id, OVEN_SEM, 1);
-
+        change_sem(oven_sem, &sem_post);
         sleep(cooking_time);
 
-        change_sem(sem_id, OVEN_SEM, -1);
+        change_sem(oven_sem, &sem_wait);
         pizza_type = take_out_from_oven(oven);
         printf("[COOK]\t\t pid: %d time: %s\tinfo: Wyjmuję pizze: %d. Liczba pizz w piecu: %d. Liczba pizz na stole: %d.\n", getpid(), get_current_time(), pizza_type, oven->pizza_count, table->pizza_count);
-        change_sem(sem_id, OVEN_SEM, 1);
-        change_sem(sem_id, FULL_OVEN_SEM, 1);
+        change_sem(oven_sem, &sem_post);
+        change_sem(full_oven_sem, &sem_post);
 
-        change_sem(sem_id, FULL_TABLE_SEM, -1); // decrement to block placing pizza if table is full (when full table is 0 it blocks)
+        change_sem(full_table_sem, &sem_wait); // decrement to block placing pizza if table is full (when full table is 0 it blocks)
 
-        change_sem(sem_id, TABLE_SEM, -1);
+        change_sem(table_sem, &sem_wait);
         put_on_table(table, pizza_type);
         printf("[COOK]\t\t pid: %d time: %s\tinfo: Umieszczam pizze na stole: %d. Liczba pizz w piecu: %d. Liczba pizz na stole: %d.\n", getpid(), get_current_time(), pizza_type, oven->pizza_count, table->pizza_count);
-        change_sem(sem_id, TABLE_SEM, 1);
+        change_sem(table_sem, &sem_post);
 
-        change_sem(sem_id, EMPTY_TABLE_SEM, 1); //increment empty table to enable supplier to get pizza from table
+        change_sem(empty_table_sem, &sem_post); //increment empty table to enable supplier to get pizza from table
     }
 }
 
@@ -73,13 +72,14 @@ int main(){
     atexit(shutdown_handler);
     signal(SIGINT, sigint_handler);
 
-    sem_t* oven_sem = get_sem(OVEN_SEM);
-    sem_t* table_sem = get_sem(TABLE_SEM);
-    sem_t* full_oven_sem = get_sem(FULL_OVEN_SEM);
-    sem_t* full_table_sem = get_sem(FULL_TABLE_SEM);
-    sem_t* empty_table_sem = get_sem(EMPTY_TABLE_SEM);
+    sem_t* table_sem = sem_open_exec(TABLE_SEM, O_RDWR, 0, 1);
+    sem_t* oven_sem = sem_open_exec(OVEN_SEM, O_RDWR, 0, 1);
+    sem_t* full_table_sem = sem_open_exec(FULL_TABLE_SEM, O_RDWR, 0, MAX_PIZZAS);
+    sem_t* empty_table_sem = sem_open_exec(EMPTY_TABLE_SEM, O_RDWR, 0, 0);
+    sem_t* full_oven_sem = sem_open_exec(FULL_OVEN_SEM ,O_RDWR, 0, MAX_PIZZAS);
 
-    oven* oven = mmap(NULL, sizeof(oven), PROT_READ | PROT_WRITE, MAP_SHARED, get_shm_fd(OVEN_PATH), 0);
-    table* table = mmap(NULL, sizeof(table), PROT_READ | PROT_WRITE, MAP_SHARED, get_shm_fd(TABLE_PATH), 0);
+    oven* oven = mmap_exec(NULL, sizeof(oven), PROT_READ | PROT_WRITE, MAP_SHARED, shm_open_exec(OVEN_PATH, O_RDWR, 0666), 0);
+    table* table = mmap_exec(NULL, sizeof(table), PROT_READ | PROT_WRITE, MAP_SHARED, shm_open_exec(TABLE_PATH, O_RDWR, 0666), 0);
+
     work(oven, table, oven_sem, table_sem, full_oven_sem, full_table_sem, empty_table_sem);
 }
