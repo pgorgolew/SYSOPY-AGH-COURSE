@@ -6,4 +6,4 @@ compile:
 	$(CC) main.c -o main -lpthread -lrt
 
 clean:
-	rm -f main cook supplier oven table
+	rm -f main cook supplier
