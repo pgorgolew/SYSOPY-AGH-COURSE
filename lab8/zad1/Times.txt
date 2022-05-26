@@ -1,0 +1,134 @@
+Metoda blokowa jest szybsza, ponieważ thready nie musza iterować po całej tablicy i sprawdzac ktory pixel powinny zmienic.
+---------------------------------------
+EXECUTION INFO:
+	Number of threads:	1
+	Method:		numbers
+TIMES INFO:
+	Thread index:   0		Time:  1681 [μs]
+	Total time:  3996 [μs]
+
+
+EXECUTION INFO:
+	Number of threads:	1
+	Method:		block
+TIMES INFO:
+	Thread index:   0		Time:   772 [μs]
+	Total time:  2981 [μs]
+
+
+EXECUTION INFO:
+	Number of threads:	2
+	Method:		numbers
+TIMES INFO:
+	Thread index:   0		Time:  4629 [μs]
+	Thread index:   1		Time:  1383 [μs]
+	Total time:  8163 [μs]
+
+
+EXECUTION INFO:
+	Number of threads:	2
+	Method:		block
+TIMES INFO:
+	Thread index:   0		Time:   503 [μs]
+	Thread index:   1		Time:   512 [μs]
+	Total time:  1897 [μs]
+
+
+EXECUTION INFO:
+	Number of threads:	4
+	Method:		numbers
+TIMES INFO:
+	Thread index:   0		Time:   941 [μs]
+	Thread index:   1		Time:  8579 [μs]
+	Thread index:   2		Time:  9119 [μs]
+	Thread index:   3		Time:  4414 [μs]
+	Total time: 11665 [μs]
+
+
+EXECUTION INFO:
+	Number of threads:	4
+	Method:		block
+TIMES INFO:
+	Thread index:   0		Time:   406 [μs]
+	Thread index:   1		Time:   253 [μs]
+	Thread index:   2		Time:   294 [μs]
+	Thread index:   3		Time:  1997 [μs]
+	Total time:  4816 [μs]
+
+
+EXECUTION INFO:
+	Number of threads:	8
+	Method:		numbers
+TIMES INFO:
+	Thread index:   0		Time:   732 [μs]
+	Thread index:   1		Time:  2955 [μs]
+	Thread index:   2		Time:  1182 [μs]
+	Thread index:   3		Time:  1509 [μs]
+	Thread index:   4		Time: 13425 [μs]
+	Thread index:   5		Time:  1498 [μs]
+	Thread index:   6		Time:  1051 [μs]
+	Thread index:   7		Time:   636 [μs]
+	Total time: 16676 [μs]
+
+
+EXECUTION INFO:
+	Number of threads:	8
+	Method:		block
+TIMES INFO:
+	Thread index:   0		Time:    95 [μs]
+	Thread index:   1		Time:   102 [μs]
+	Thread index:   2		Time:   114 [μs]
+	Thread index:   3		Time:   134 [μs]
+	Thread index:   4		Time:   123 [μs]
+	Thread index:   5		Time:   143 [μs]
+	Thread index:   6		Time:   116 [μs]
+	Thread index:   7		Time:    91 [μs]
+	Total time:  8559 [μs]
+
+
+EXECUTION INFO:
+	Number of threads:	16
+	Method:		numbers
+TIMES INFO:
+	Thread index:   0		Time:   787 [μs]
+	Thread index:   1		Time:   858 [μs]
+	Thread index:   2		Time:  1070 [μs]
+	Thread index:   3		Time:  1011 [μs]
+	Thread index:   4		Time:  1168 [μs]
+	Thread index:   5		Time: 27560 [μs]
+	Thread index:   6		Time:  1644 [μs]
+	Thread index:   7		Time: 18053 [μs]
+	Thread index:   8		Time:  2188 [μs]
+	Thread index:   9		Time: 14613 [μs]
+	Thread index:  10		Time: 12138 [μs]
+	Thread index:  11		Time:  1688 [μs]
+	Thread index:  12		Time:  1197 [μs]
+	Thread index:  13		Time:  7519 [μs]
+	Thread index:  14		Time:   661 [μs]
+	Thread index:  15		Time:  1111 [μs]
+	Total time: 34770 [μs]
+
+
+EXECUTION INFO:
+	Number of threads:	16
+	Method:		block
+TIMES INFO:
+	Thread index:   0		Time:    71 [μs]
+	Thread index:   1		Time:    81 [μs]
+	Thread index:   2		Time:    86 [μs]
+	Thread index:   3		Time:   103 [μs]
+	Thread index:   4		Time:   298 [μs]
+	Thread index:   5		Time:   152 [μs]
+	Thread index:   6		Time:   104 [μs]
+	Thread index:   7		Time:    78 [μs]
+	Thread index:   8		Time:    79 [μs]
+	Thread index:   9		Time:    63 [μs]
+	Thread index:  10		Time:    63 [μs]
+	Thread index:  11		Time:    62 [μs]
+	Thread index:  12		Time:    53 [μs]
+	Thread index:  13		Time:    94 [μs]
+	Thread index:  14		Time:  1006 [μs]
+	Thread index:  15		Time:   103 [μs]
+	Total time: 12391 [μs]
+
+

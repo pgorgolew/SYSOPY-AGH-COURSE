@@ -65,7 +65,6 @@ void start_workers(int amount_of_cooks, int amount_of_suppliers){
         if (pid == 0)
             execl("./supplier", "./supplier", NULL);
     }
-
 }
 
 int main(int argc, char* argv[]){
